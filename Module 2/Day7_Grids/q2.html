@@ -8,26 +8,70 @@
         .table{
             display: grid;
             grid-template-columns: repeat(6, 1fr);
-            width: 500px;
+            width: 900px;
               text-align: center;
-              border: 2px solid black;
+              border: 2px solid white;
               background-color:white;
+              gap: 10px;
+              margin: 0 auto;
+
         }
+        h1{
+           text-align: center;
+        }
+        h1::before {
+  content: "⭐";
+}
+
+h1::after {
+  content: "⭐";
+}
         .cell{
-            border: 1px solid gray;
+            border: 1px solid white;
+            border-radius: 30%;
             padding: 10px;
             font-weight: bold;
-            
 
         }
+        #notitle{
+            background-color: white;
+        }
+        .cell:nth-child(6n + 1) {
+  background-color: lightgray;
+}
 
+.cell:nth-child(6n + 2) {
+  background-color: #f8c8dc;
+}
+
+.cell:nth-child(6n + 3) {
+  background-color: #c3e6cb;
+}
+
+.cell:nth-child(6n + 4) {
+  background-color: #bee5eb;
+}
+
+.cell:nth-child(6n + 5) {
+  background-color: #ffeeba;
+}
+
+.cell:nth-child(6n + 6) {
+  background-color: #f5c6cb;
+}
+.note{
+ grid-column: span 6;
+ background-color: yellow;
+ text-align: left;
+}
+       
     </style>
 </head>
 <body>
-    <h1 style="padding: 10px; font-family: cursive;"><b>Weekly Schedule</b></h1>
+    <h1 style="font-family: cursive;"><b>Weekly Schedule</b></h1>
     <div class="table">
         
-    <div class="cell header"></div>
+    <div class="cell header" id="notitle"></div>
     <div class="cell header">Monday</div>
     <div class="cell header">Tuesday</div>
     <div class="cell header">Wednesday</div>
@@ -97,6 +141,7 @@
     <div class="cell"></div>
     <div class="cell"></div>
     
+    <div class="note" style="padding: 1em; border-radius: 20px;">Note:</div>
     </div>
 </body>
 </html>

@@ -1,97 +1,256 @@
-<!DOCTYPE html>
+<!doctype html>
+<!-- Build a responsive Personal Portfolio Webpage using HTML + CSS only
+ which includes header, hero section, 
+skills section and footer with animation, unique color theme with hover effects. -->
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Maneesha — Portfolio</title>
+  <meta name="description" content="Personal portfolio — header, hero, skills, footer. Responsive and animated with unique color theme." />
   <style>
-    .container {
-  width: 500px;
-  height: 600px;
-  border: 3px solid gray;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  padding: 50px;
-  margin: 10px auto;
-  text-align: left;
-  font-family: Arial, sans-serif;
-  background-color: #fff;
-}
+    
 
-.container img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
+    :root{
+      --bg-1: 13 17 23;           /* dark for overlay (r g b) */
+      --c1: 62 100 211;          /* indigo */
+      --c2: 17 184 170;          /* teal */
+      --accent: 255 99 72;      /* coral */
+      --muted: 245 246 250;     /* off-white */
+      --glass: 255 255 255;     /* for glass cards */
+      --max-width: 1100px;
+      --radius: 14px;
+      --fw-regular: 400;
+      --fw-bold: 700;
+    }
 
-#rating {
-  background-color: #388e3c;
-  color: white;
-  border: none;
-  padding: 2px 6px;
-  border-radius: 5px;
-  font-size: 14px;
-}
+    /* Reset & base */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(135deg, rgba(var(--c1),0.12), rgba(var(--c2),0.08));
+      color: rgb(30 41 59);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding:32px 16px;
+      display:flex;justify-content:center;
+    }
 
-#flipcart {
-  width: 50px;
-  vertical-align: middle;
-}
+    .wrap{
+      width:100%;max-width:var(--max-width);
+    }
 
-.price {
-  font-size: 18px;
-  font-weight: bold;
-}
+    /* Decorative animated radial background */
+    .bg-planet{
+      position:fixed;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, rgba(var(--c2),0.18), rgba(var(--c1),0.14) 35%, transparent 60%);
+      filter: blur(28px);opacity:0.85;z-index:0;pointer-events:none;mix-blend-mode:screen;
+      animation: float 12s ease-in-out infinite;
+    }
+    @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-18px)}100%{transform:translateY(0)}}
 
-.price ins {
-  color: #000;
-  text-decoration: none;
-}
+    header{
+      position:relative;z-index:10;background:transparent;margin-bottom:26px;display:flex;align-items:center;justify-content:space-between;
+    }
+    .brand{
+      display:flex;align-items:center;gap:12px;font-weight:var(--fw-bold);font-size:18px;color:rgb(var(--c1));
+    }
+    .logo{
+      width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg, rgb(var(--c1)), rgb(var(--c2)));box-shadow:0 6px 18px rgba(11,15,22,0.2);
+      display:grid;place-items:center;color:white;font-weight:800;font-size:18px;
+    }
 
-.price del {
-  color: grey;
-  font-size: 14px;
-  margin-left: 5px;
-}
+    nav ul{display:flex;gap:18px;list-style:none}
+    nav a{color:rgb(30 41 59);text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:600}
+    nav a:hover{background:rgba(var(--c1),0.08);color:rgb(var(--c1));transform:translateY(-3px);transition:all .22s ease}
 
-.discount {
-  color: #388e3c;
-  font-weight: bold;
-  margin-left: 5px;
-  font-size: 14px;
-}
+    /* Header CTA */
+    .btn-cta{background:linear-gradient(90deg, rgb(var(--c1)), rgb(var(--c2)));padding:10px 14px;border-radius:10px;color:white;font-weight:700;box-shadow:0 6px 20px rgba(17,24,39,.12);transition:transform .18s ease;}
+    .btn-cta:hover{transform:translateY(-4px) scale(1.02)}
 
-.bank-offer {
-  color: #388e3c;
-  font-weight: bold;
-  margin-top: 5px;
-}
+    /* Hero */
+    .hero{
+      position:relative;z-index:5;background:linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.30));
+      border-radius:var(--radius);padding:36px;display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center;box-shadow:0 10px 30px rgba(11,15,22,0.06);
+      backdrop-filter: blur(6px);
+    }
 
-#BuyNow {
-  display: none; 
-}
+    .hero-left h1{font-size:clamp(24px,4.6vw,40px);line-height:1.02;color:rgb(15 23 42);}
+    .hero-left p{margin-top:12px;color:rgb(75 85 99);font-size:15px}
 
+    .cta-row{margin-top:18px;display:flex;gap:12px;align-items:center}
+    .outline{padding:10px 14px;border-radius:10px;border:1px dashed rgba(var(--c1),0.16);font-weight:700}
+
+    /* profile card */
+    .profile{
+      background:linear-gradient(180deg, rgba(var(--glass),0.95), rgba(var(--glass),0.88));border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center;box-shadow:0 8px 30px rgba(11,15,22,0.06);
+    }
+    .avatar{width:120px;height:120px;border-radius:50%;background:linear-gradient(180deg, rgba(var(--c2),0.12), rgba(var(--c1),0.14));display:grid;place-items:center;font-weight:800;color:rgb(var(--c1));font-size:36px}
+    .small{font-size:13px;color:rgb(75 85 99)}
+
+    /* Skills */
+    .skills{
+      margin-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:start;
+    }
+    .skill-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.86));padding:16px;border-radius:12px;box-shadow:0 6px 20px rgba(11,15,22,0.04);transition:transform .22s cubic-bezier(.2,.9,.3,1), box-shadow .22s;
+    }
+    .skill-card:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(11,15,22,0.08)}
+    .skill-title{display:flex;justify-content:space-between;font-weight:700;margin-bottom:10px}
+    .bar{height:10px;background:linear-gradient(90deg, rgba(var(--c1),0.16), rgba(var(--c2),0.14));border-radius:999px;overflow:hidden}
+    .bar > i{display:block;height:100%;background:linear-gradient(90deg, rgb(var(--c1)), rgb(var(--c2)));width:0;transform:translateX(-6px);animation: fill 1.3s forwards ease-out}
+    .skill-stack{margin-top:8px;font-size:13px;color:rgb(75 85 99)}
+
+    @keyframes fill{
+      0%{width:0}
+      100%{width:var(--w)}
+    }
+
+    /* Footer */
+    footer{margin-top:36px;padding:20px;border-radius:12px;background:linear-gradient(180deg, rgba(8,10,14,0.02), rgba(8,10,14,0.03));display:flex;justify-content:space-between;align-items:center}
+    .socials{display:flex;gap:12px}
+    .socials a{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:10px;border:1px solid rgba(15,23,42,0.06);text-decoration:none}
+    .socials a:hover{transform:translateY(-4px);box-shadow:0 8px 18px rgba(11,15,22,0.06)}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;}
+      .skills{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:640px){
+      header nav ul{display:none}
+      header{gap:12px}
+      .skills{grid-template-columns:1fr}
+      .hero{padding:20px}
+    }
+
+    /* subtle entrance animation */
+    .fade-up{opacity:0;transform:translateY(10px);animation:appear .8s ease-out forwards}
+    .delay-1{animation-delay:.12s}
+    .delay-2{animation-delay:.28s}
+    .delay-3{animation-delay:.44s}
+    @keyframes appear{to{opacity:1;transform:none}}
+
+    /* Accessible focus */
+    a:focus{outline:3px solid rgba(var(--c2),0.18);outline-offset:4px}
   </style>
 </head>
 <body>
-  <div class="container">
-  <img src="https://rukminim2.flixcart.com/image/612/612/xif0q/smartwatch/w/x/h/-original-imahfa7xspmxemvj.jpeg" alt="watch image">
-  
-  <h3>SAMSUNG Galaxy Watch6 LTE</h3>
-  <p>Graphite Strap, 44mm</p>
+  <div class="bg-planet" aria-hidden="true"></div>
 
-  <button id="rating">4.3 ★</button> (973)
-  <img id="flipcart" src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/fa_62673a.png" alt="flipcart">
-  
-  <p class="price">
-    <ins>₹18,999</ins>
-    <del>₹41,999</del>
-    <span class="discount">54% off</span>
-  </p>
+  <main class="wrap">
+    <header class="fade-up">
+      <div class="brand">
+        <div class="logo">MM</div>
+        <div>
+          <div style="font-size:13px;color:rgb(75 85 99)">Mateti Maneesha</div>
+          <div style="font-size:11px;color:rgb(120 126 141)">AI Web Developer</div>
+        </div>
+      </div>
 
-  <p class="bank-offer">Bank Offer</p>
-  <button style="color: red; font-size: 20px; background-color: white; font-weight: bold;" >Buy Now</button>
-</div>
+      <nav>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <a class="btn-cta" href="#contact">Hire Me</a>
+    </header>
+
+    <section class="hero fade-up delay-1" aria-label="Hero">
+      <div class="hero-left">
+        <h1>Hello, I'm <span style="background:linear-gradient(90deg, rgb(var(--c1)), rgb(var(--c2)));-webkit-background-clip:text;background-clip:text;color:transparent;">Maneesha</span><br /><small style="font-size:16px;color:rgb(75 85 99);font-weight:600">AI Web Developer & JavaScript Enthusiast</small></h1>
+        <p>I build responsive interfaces and developer-friendly tools. I love crafting clean UI, animations, and integrating AI features into real-world applications.</p>
+
+        <div class="cta-row">
+          <a class="btn-cta" href="#contact">Let's talk</a>
+          <a class="outline" href="#work">View projects</a>
+        </div>
+
+        <div class="skills" style="margin-top:20px">
+          <!-- Skill 1 -->
+          <div class="skill-card fade-up delay-2" style="--w:92%">
+            <div class="skill-title"><span>JavaScript</span><span>92%</span></div>
+            <div class="bar"><i style="animation-delay:.12s"></i></div>
+            <div class="skill-stack">ES6+, DOM, Fetch, Async patterns, Vite</div>
+          </div>
+
+          <!-- Skill 2 -->
+          <div class="skill-card fade-up delay-3" style="--w:86%">
+            <div class="skill-title"><span>CSS & UI</span><span>86%</span></div>
+            <div class="bar"><i style="animation-delay:.18s"></i></div>
+            <div class="skill-stack">Responsive, Grid, Flexbox, Animations</div>
+          </div>
+
+          <!-- Skill 3 -->
+          <div class="skill-card fade-up" style="--w:75%">
+            <div class="skill-title"><span>AI Integrations</span><span>75%</span></div>
+            <div class="bar"><i style="animation-delay:.22s"></i></div>
+            <div class="skill-stack">Prompting, API design, simple ML tooling</div>
+          </div>
+        </div>
+
+      </div>
+
+      <aside class="profile fade-up delay-1" aria-label="Profile card">
+        <div class="avatar">MM</div>
+        <div style="font-weight:700">Mateti Maneesha</div>
+        <div class="small">AI Web Developer — JavaScript • Prompting • UI</div>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <a class="outline" href="#contact">Message</a>
+          <a class="btn-cta" href="#work">Portfolio</a>
+        </div>
+        <div style="margin-top:12px;font-size:13px;color:rgb(75 85 99)">Available for freelance & collaboration</div>
+      </aside>
+    </section>
+
+    <section id="skills" class="fade-up" style="margin-top:26px">
+      <h3 style="font-size:18px;margin-bottom:12px">More Skills</h3>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+        <div class="skill-card" style="padding:12px;display:flex;flex-direction:column;align-items:flex-start">
+          <strong>HTML/CSS</strong>
+          <small class="small">Semantic markup, accessibility</small>
+        </div>
+        <div class="skill-card" style="padding:12px;display:flex;flex-direction:column;align-items:flex-start">
+          <strong>React (basics)</strong>
+          <small class="small">Components, hooks, state</small>
+        </div>
+        <div class="skill-card" style="padding:12px;display:flex;flex-direction:column;align-items:flex-start">
+          <strong>Design Systems</strong>
+          <small class="small">Tokens, components</small>
+        </div>
+        <div class="skill-card" style="padding:12px;display:flex;flex-direction:column;align-items:flex-start">
+          <strong>Tools</strong>
+          <small class="small">Git, VS Code, Figma</small>
+        </div>
+      </div>
+    </section>
+
+    <footer class="fade-up" id="contact">
+      <div>
+        <div style="font-weight:700">Let's build something great</div>
+        <div class="small">Email: matetimaneesha@gmail.com • Phone: 9000000000</div>
+      </div>
+
+      <div class="socials" aria-hidden="false">
+        <a href="#" title="GitHub" aria-label="GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 .5C5.73.5.98 5.25.98 11.52c0 4.68 3.03 8.64 7.24 10.04.53.1.72-.23.72-.5 0-.25-.01-.92-.01-1.8-2.94.64-3.56-1.42-3.56-1.42-.48-1.22-1.17-1.55-1.17-1.55-.96-.66.07-.65.07-.65 1.07.07 1.64 1.1 1.64 1.1.94 1.62 2.48 1.15 3.09.88.1-.69.37-1.15.67-1.41-2.35-.27-4.82-1.17-4.82-5.21 0-1.15.41-2.09 1.1-2.83-.11-.27-.48-1.38.11-2.88 0 0 .9-.29 2.94 1.09a10.2 10.2 0 012.67-.36c.91.01 1.83.12 2.67.36 2.03-1.38 2.93-1.09 2.93-1.09.6 1.5.23 2.61.11 2.88.69.74 1.09 1.68 1.09 2.83 0 4.05-2.48 4.94-4.84 5.2.38.33.72.98.72 1.98 0 1.43-.01 2.59-.01 2.95 0 .27.18.61.73.5 4.22-1.4 7.25-5.36 7.25-10.04C23 5.25 18.27.5 12 .5z" fill="currentColor"/></svg>
+        </a>
+        <a href="#" title="LinkedIn" aria-label="LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.98 3.5C4.98 4.88 3.88 6 2.49 6S0 4.88 0 3.5C0 2.12 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM0 8.98h5V24H0V8.98zM8 8.98h4.78v2.06h.07c.66-1.25 2.28-2.57 4.69-2.57C23.22 8.47 24 11.06 24 15.6V24h-5v-7.42c0-1.77-.03-4.05-2.47-4.05-2.47 0-2.85 1.93-2.85 3.92V24H8V8.98z" fill="currentColor"/></svg>
+        </a>
+        <a href="#" title="Twitter" aria-label="Twitter">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23 4.56c-.8.36-1.63.61-2.5.72.9-.54 1.6-1.4 1.93-2.42-.84.5-1.76.86-2.75 1.05C19 2.6 17.73 2 16.38 2c-1.83 0-3.32 1.49-3.32 3.33 0 .26.03.51.09.75C9.69 6.85 6.13 5.1 3.6 2.44c-.29.5-.46 1.07-.46 1.69 0 1.17.6 2.2 1.52 2.8-.56-.02-1.09-.17-1.55-.43v.04c0 1.62 1.14 2.97 2.65 3.28-.27.07-.56.11-.86.11-.21 0-.41-.02-.61-.06.41 1.28 1.6 2.21 3.01 2.24-1.1.86-2.5 1.38-4.02 1.38-.26 0-.52-.02-.77-.05C6.34 19.79 8.5 20.5 10.86 20.5c6.4 0 9.9-5.34 9.9-9.97v-.45c.68-.5 1.27-1.14 1.74-1.86-.62.28-1.27.46-1.95.54.7-.43 1.24-1.1 1.5-1.9z" fill="currentColor"/></svg>
+        </a>
+      </div>
+    </footer>
+
+  </main>
 
 </body>
 </html>

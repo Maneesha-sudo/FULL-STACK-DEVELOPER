@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bright Login Page</title>
+  <style>
+    /* -------- RESET -------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      width: 100%;
+      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* -------- LOGIN BOX -------- */
+    .login-container {
+      background: rgba(255, 255, 255, 0.85);
+      padding: 40px 35px;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+      backdrop-filter: blur(5px);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .login-container h2 {
+      color: #ff7b00;
+      font-size: 30px;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 2px #ffffff;
+    }
+
+    .input-group {
+      margin: 15px 0;
+      text-align: left;
+    }
+
+    .input-group label {
+      display: block;
+      color: #333;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 2px solid #ffb347;
+      border-radius: 10px;
+      outline: none;
+      background-color: #fff7e6;
+      transition: 0.3s;
+    }
+
+    .input-group input:focus {
+      border-color: #ff7b00;
+      background-color: #ffffff;
+    }
+
+    .btn {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      background: linear-gradient(135deg, #ffb347, #ffcc33);
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255, 140, 0, 0.4);
+      transition: transform 0.2s, background 0.3s;
+    }
+
+    .btn:hover {
+      background: linear-gradient(135deg, #ff9933, #ffcc33);
+      transform: scale(1.03);
+    }
+
+    .error-message {
+      color: red;
+      font-size: 14px;
+      margin-top: 10px;
+      display: none;
+    }
+
+    /* -------- ANIMATION -------- */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* -------- RESPONSIVE -------- */
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 30px 25px;
+        width: 90%;
+      }
+
+      .login-container h2 {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h2>Welcome Back 🌞</h2>
+
+    <form id="loginForm">
+      <div class="input-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Enter your username">
+      </div>
+
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password">
+      </div>
+
+      <button type="submit" class="btn">Login</button>
+      <p class="error-message" id="errorMsg">Please fill in both fields!</p>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    const username = document.getElementById('username');
+    const password = document.getElementById('password');
+    const errorMsg = document.getElementById('errorMsg');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      if (username.value.trim() === "" || password.value.trim() === "") {
+        errorMsg.style.display = "block";
+      } else {
+        errorMsg.style.display = "none";
+        alert("Login Successful 🌿");
+        form.reset();
+      }
+    });
+  </script>
+
+</body>
+</html>

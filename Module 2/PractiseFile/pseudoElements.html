@@ -1,24 +1,251 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Home</title>
 
-<style>
-h1::before {
-  content: "✨ ";
-}
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Poppins, sans-serif;
+        }
 
-h1::after {
-  content: " ✨";
-}
+        body{
+            background:#f8f7ff;
+        }
 
-p::first-letter {
-  font-size: 24px;
-  color: red;
-}
-p::selection {
-  background: yellow;
-  color:blue;
-}
-</style>
+        header{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:15px 40px;
+            background:#ffffff;
+            box-shadow:0 3px 10px rgba(0,0,0,0.08);
+            position:sticky;
+            top:0;
+            z-index:10;
+        }
+
+        header h1{
+            color:#6a5acd;
+        }
+
+        nav a{
+            margin:0 15px;
+            text-decoration:none;
+            color:#333;
+            font-weight:600;
+        }
+
+        /* BANNER SLIDER */
+        .banner{
+            width:100%;
+            height:350px;
+            overflow:hidden;
+            border-radius:20px;
+            margin-top:20px;
+        }
+
+        .banner img{
+            width:100%;
+            height:350px;
+            object-fit:cover;
+            animation:slide 12s infinite;
+        }
+
+        @keyframes slide {
+            0% {transform:translateX(0);}
+            33% {transform:translateX(-100%);}
+            66% {transform:translateX(-200%);}
+            100% {transform:translateX(0);}
+        }
+
+        /* CATEGORY SECTION */
+        .categories{
+            margin-top:40px;
+            padding:20px;
+        }
+
+        .categories h2{
+            margin-bottom:15px;
+        }
+
+        .cat-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+            gap:20px;
+        }
+
+        .cat-card{
+            background:#ebe0ff;
+            padding:20px;
+            border-radius:15px;
+            text-align:center;
+            transition:.3s;
+        }
+
+        .cat-card:hover{
+            transform:translateY(-5px);
+            background:#d8c9ff;
+        }
+
+        .cat-card img{
+            width:100%;
+            height:160px;
+            object-fit:cover;
+            border-radius:10px;
+        }
+
+        /* DISCOUNT SECTION */
+        .discount{
+            margin:40px 0;
+            background:#ffe9ef;
+            padding:30px;
+            border-radius:20px;
+            text-align:center;
+        }
+
+        .discount h3{
+            font-size:2rem;
+            color:#d63384;
+        }
+
+        /* PRODUCT PREVIEW GRID */
+        .products{
+            padding:20px;
+        }
+
+        .prod-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+            gap:20px;
+        }
+
+        .product{
+            background:white;
+            padding:15px;
+            border-radius:10px;
+            box-shadow:0 4px 12px rgba(0,0,0,0.1);
+            transition:.3s;
+        }
+
+        .product:hover{
+            transform:translateY(-6px);
+        }
+
+        .product img{
+            width:100%;
+            height:180px;
+            object-fit:cover;
+            border-radius:10px;
+        }
+
+        .product button{
+            margin-top:10px;
+            width:100%;
+            padding:10px;
+            border:none;
+            background:#6a5acd;
+            color:white;
+            border-radius:8px;
+            cursor:pointer;
+        }
+
+        footer{
+            text-align:center;
+            padding:20px;
+            background:#f0f0ff;
+            margin-top:40px;
+        }
+    </style>
+</head>
+
 <body>
-    <h1>Girl great</h1>
-    <p>hello my name is maneeeeeeee</p>
+
+    <header>
+        <h1>ShopEase</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Categories</a>
+            <a href="product.html">Product Page</a>
+            <a href="#">Cart</a>
+        </nav>
+    </header>
+
+    <!-- BANNER SLIDER -->
+    <div class="banner">
+        <img src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb">
+        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f">
+        <img src="https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127">
+    </div>
+
+    <!-- CATEGORIES -->
+    <section class="categories">
+        <h2>Shop by Category</h2>
+
+        <div class="cat-grid">
+            <div class="cat-card">
+                <img src="https://images.unsplash.com/photo-1517869369706-79b39e369aae">
+                <h3>Fashion</h3>
+            </div>
+
+            <div class="cat-card">
+                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8">
+                <h3>Electronics</h3>
+            </div>
+
+            <div class="cat-card">
+                <img src="https://images.unsplash.com/photo-1506806732259-39c2d0268443">
+                <h3>Footwear</h3>
+            </div>
+
+            <div class="cat-card">
+                <img src="https://images.unsplash.com/photo-1585386959984-a41552231641">
+                <h3>Home Decor</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- DISCOUNT -->
+    <div class="discount">
+        <h3>🔥 Flat 50% Off on All Products!</h3>
+        <p>Limited Time Offer • Grab Yours Now!</p>
+    </div>
+
+    <!-- PRODUCT PREVIEW -->
+    <section class="products">
+        <h2>Trending Products</h2>
+
+        <div class="prod-grid">
+            <div class="product">
+                <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796">
+                <h4>Smart Watch</h4>
+                <p>$49.99</p>
+                <a href="product.html"><button>View More</button></a>
+            </div>
+
+            <div class="product">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e">
+                <h4>Wireless Headphones</h4>
+                <p>$39.99</p>
+                <button>Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="https://images.unsplash.com/photo-1475180098004-ca77a66827be">
+                <h4>Men's Shoes</h4>
+                <p>$29.99</p>
+                <button>Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        © 2025 ShopEase. All Rights Reserved.
+    </footer>
+
 </body>
+</html>
