@@ -14,6 +14,17 @@
 
           
         }
+        .price{
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff4d4d;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 14px;
+        }
         .cell{
             padding: 10px;
             margin: 20px;
@@ -22,53 +33,84 @@
             border: 2px solid white;
             background-color: white;
             text-align: center;
-            
+             position: relative;
             box-shadow: 4px 4px 10px rgb(51, 44, 44);
         }
         .cell p:nth-child(1){
             font-weight: bold;
             font-size:larger;
         }
+        @media (max-width: 900px){
+            .Coffee{
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* ======= Small Screens (1 per row) ======= */
+        @media (max-width: 600px){
+            .Coffee{
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
     </style>
 </head>
 <body>
     <div class="Coffee">
-     <div class="cell"><p>Cappuccino</p>
+        
+     <div class="cell">
+        <span class="price">$50</span>
+        <p>Cappuccino</p>
         <p>Usage of the internet is 
             becoming more common due to rapid advance</p>
 
      </div>
-     <div class="cell"><p>Americano</p>
+     <div class="cell">
+        <span class="price">$50</span>
+        <p>Americano</p>
         <p>Usage of the internet is 
             becoming more common due to rapid advance</p>
 </div>
-     <div class="cell"><p>Espresso</p>
+     <div class="cell">
+        <span class="price">$50</span>
+        <p>Espresso</p>
         <p>Usage of the internet is 
             becoming more common due to rapid advance</p>
 </div>
 
-     <div class="cell"><p>Macchiato</p>
+     <div class="cell">
+        <span class="price">$50</span>
+        <p>Macchiato</p>
         <p>Usage of the internet is 
             becoming more common due to rapid advance</p>
 </div>
 
-     <div class="cell"><p>Mocha</p>
+     <div class="cell">
+        <span class="price">$50</span>
+        <p>Mocha</p>
         <p>Usage of the internet is 
             becoming more common due to rapid advance</p>
 </div>
-     <div class="cell"><p>Coffee Latte</p>
+     <div class="cell">
+        <span class="price">$50</span>
+        <p>Coffee Latte</p>
         <p>Usage of the internet is 
             becoming more common due to rapid advance</p>
 </div>
-     <div class="cell"><p>Piccolo Latte</p>
+     <div class="cell">
+        <span class="price">$50</span>
+        <p>Piccolo Latte</p>
         <p>Usage of the internet is 
             becoming more common due to rapid advance</p>
 </div>
-     <div class="cell"><p>Ristretto</p>
+     <div class="cell">
+        <span class="price">$50</span>
+        <p>Ristretto</p>
         <p>Usage of the internet is 
             becoming more common due to rapid advance</p>
 </div>
-     <div class="cell"><p>Affogato</p>
+     <div class="cell">
+        <span class="price">$50</span>
+        <p>Affogato</p>
         <p>Usage of the internet is 
             becoming more common due to rapid advance</p>
 </div>
