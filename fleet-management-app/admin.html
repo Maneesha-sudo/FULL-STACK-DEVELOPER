@@ -4,8 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin dashboard page</title>
+    <style>
+        body{
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        #navbar{
+            background-color: gray;
+            padding: 15px;
+            font-size: 20px;
+            text-align: center;
+        }
+        #box{
+            display: flex;
+        }
+        #sidebar{
+           padding: 20px;
+           background-color: yellow; 
+        }
+        #addbtn{
+            padding: 10px 20px;
+            background-color: brown;
+            color: white;
+            border: none;
+        }
+        #main{
+            width: 70%;
+            padding: 20px;
+            border: 1px solid rebeccapurple;
+            background-color: white;
+            border-radius: 8px;
+        }
+        .card{
+            border: 1px solid lime;
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+
+        }
+    </style>
 </head>
 <body>
-    
+    <div id="navbar"><b>Admin Dashboard</b></div>
+    <div id="box">
+          <div id="sidebar">
+            <h3>Add feet</h3>
+<input type="text" id="RegNo" placeholder="Regno of vehicle">
+
+<select id="category">
+    <option id="">Select category</option>
+    <option id="Auto">Auto</option>
+    <option id="Car">Car</option>
+    <option id="Truck">Truck</option>
+    <option id="Bus">Bus</option>
+</select>
+<input type="text" id="Driver" placeholder="Driver Name">
+
+<select id="availablityy">
+<option value="">availablity</option>
+<option value="available">Available</option>
+<option value="Unavailable">Unavailable</option>
+</select>
+
+<button id="addbtn">Add Fleet</button>
+ </div>
+ <div id="main"></div>
+    </div>
 </body>
+<script>
+const addbtn= document.getElementById("addbtn");
+const main=document.getElementById("main");
+addbtn.addEventListener("click", ()=>{
+    const reg= document.getElementById("RegNo").value;
+    const cat = document.getElementById("category").value;
+    const driver=document.getElementById("Driver").value;
+    const avail= document.getElementById("availablityy").value;
+
+    if(!reg || !cat || !driver || !avail){
+alert("please fill all teh fields");
+
+    }   
+
+
+//create cards
+const card=document.createElement("div");
+card.className= "card";
+card.innerHTML =`
+<h4>${reg}</h4>
+<p>category: ${cat}</p>
+<p>Driver:${cat}</p>
+<p>Status:${avail}</p>`;
+
+main.appendChild(card);
+
+  document.getElementById("regNo").value="";
+     document.getElementById("category").value="";
+   document.getElementById("Driver").value="";
+    document.getElementById("availablityy").value="";
+
+});
+
+</script>
 </html>
