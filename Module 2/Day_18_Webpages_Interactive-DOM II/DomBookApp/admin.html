@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Management Page</title>
+    <link rel="stylesheet" href="admin.css">
+
+</head>
+
+<body>
+    <h2>Book Management App</h2>
+
+    <form id="AddBook">
+        <input type="text" id="title" placeholder="Enter title of the book" required>
+        <input type="text" id="author" placeholder="Enter author name" required>
+
+        <select id="category">
+            <option value="Fiction">Fiction</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Technical">Technical</option>
+        </select>
+
+        <button type="submit">Add Book</button>
+    </form>
+
+    <button id="AtoZ">Sort A → Z</button>
+    <button id="ZtoA">Sort Z → A</button>
+
+    <select id="filterCategory">
+        <option value="All">All</option>
+        <option value="Fiction">Fiction</option>
+        <option value="Comedy">Comedy</option>
+        <option value="Technical">Technical</option>
+    </select>
+
+    <div id="bookContainer"></div>
+
+<script>
+    let books = [];
+
+    const form = document.getElementById("AddBook");
+    const container = document.getElementById("bookContainer");
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const title = document.getElementById("title").value;
+        const author = document.getElementById("author").value;
+        const category = document.getElementById("category").value;
+
+        const book = {
+            title,
+            author,
+            category,
+            imageUrl: "https://m.media-amazon.com/images/I/71ZB18P3inL._SY522_.jpg"
+        };
+
+        books.push(book);
+        renderBooks();
+        form.reset();
+    });
+
+    function renderBooks(bookArray = books) {
+        container.innerHTML = "";
+
+        bookArray.forEach((book, index) => {
+            const card = document.createElement("div");
+            card.className = "bookCard";
+
+            card.innerHTML = `
+                <img src="${book.imageUrl}" class="bookImage">
+                <h3>${book.title}</h3>
+                <p><strong>Author:</strong> ${book.author}</p>
+                <p><strong>Category:</strong> ${book.category}</p>
+            `;
+
+            const delbtn = document.createElement("button");
+            delbtn.textContent = "Delete";
+            delbtn.className = "deleteBtn";
+
+            delbtn.addEventListener("click", () => {
+                books.splice(index, 1);
+                renderBooks();
+            });
+
+            card.appendChild(delbtn);
+            container.appendChild(card);
+        });
+    }
+
+    document.getElementById("AtoZ").addEventListener("click", () => {
+        books.sort((a, b) => a.title.localeCompare(b.title));
+        renderBooks();
+    });
+
+    document.getElementById("ZtoA").addEventListener("click", () => {
+        books.sort((a, b) => b.title.localeCompare(a.title));
+        renderBooks();
+    });
+
+    document.getElementById("filterCategory").addEventListener("change", (e) => {
+        const selected = e.target.value;
+
+        if (selected === "All") {
+            renderBooks();
+        } else {
+            const filteredBooks = books.filter(book => book.category === selected);
+            renderBooks(filteredBooks);
+        }
+    });
+</script>
+
+</body>
+</html>
