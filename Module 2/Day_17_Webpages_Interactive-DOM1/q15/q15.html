@@ -1,19 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>To-Do List</title>
+    <style>
+        body {
+  text-align: center;
+  margin-top: 40px;
+}
+#taskList {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 12px;
+  width: 260px;        /* keeps tasks centered */
+  margin: 0 auto;      /* centers the UL */
+}
+
+        #taskInput {
+            padding: 6px;
+            width: 220px;
+        }
+
+        #taskbtn {
+            padding: 6px 10px;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 12px;
+        }
+
+        #taskList li {
+            background-color: aqua;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-radius: 5px;
+        }
+
+        /* Delete button style */
+        #taskList button:nth-child(1) {
+            background-color: #ff6767;
+            color: white;
+            border: none;
+            padding: 5px 8px;
+            border-radius: 4px;
+        }
+
+        /* Complete button style */
+        #taskList button:nth-child(2) {
+            background-color: #0d9011;
+            color: white;
+            border: none;
+            padding: 5px 8px;
+            border-radius: 4px;
+        }
+    </style>
 </head>
+
 <body>
-    <input type="text" placeholder="Enter your task">
-    <button>Add Task</button>
-    <ul>
-        <button>Delete</button>
-        <button>Complete</button>
-    </ul>
+    <h2>My To-Do List</h2>
+    <input id="taskInput" type="text" placeholder="Enter your task">
+    <button id="taskbtn">Add Task</button>
+
+    <!-- <button id="delbtn">Delete</button>
+        <button id="compbtn">Complete</button> -->
+    <ul id="taskList"></ul>
 </body>
-<script>
+<script src="q15.js">
 
 </script>
+
 </html>
