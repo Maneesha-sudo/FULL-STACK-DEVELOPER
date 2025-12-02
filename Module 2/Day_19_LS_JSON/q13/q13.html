@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notes App</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f6f6f6;
+    }
+
+    textarea {
+      width: 100%;
+      height: 200px;
+      padding: 10px;
+      font-size: 16px;
+      resize: none;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-right: 10px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>My Notes</h2>
+
+  <textarea id="noteArea" placeholder="Write your notes here..."></textarea>
+
+  <br />
+
+  <button id="saveBtn">Save Notes</button>
+  <button id="loadBtn">Load Notes</button>
+  <button id="clearBtn">Clear Notes</button>
+
+  <script>
+    const noteArea = document.getElementById("noteArea");
+    const saveBtn = document.getElementById("saveBtn");
+    const loadBtn = document.getElementById("loadBtn");
+    const clearBtn = document.getElementById("clearBtn");
+
+    // ✔ Load notes automatically on page load
+    window.addEventListener("load", () => {
+      const savedNotes = localStorage.getItem("notes");
+      if (savedNotes) {
+        noteArea.value = savedNotes;
+      }
+    });
+
+    // ✔ Save notes
+    saveBtn.addEventListener("click", () => {
+      const text = noteArea.value.trim();
+
+      if (text === "") {
+        alert("Notes cannot be empty!");
+        return;
+      }
+
+      localStorage.setItem("notes", text);
+      alert("Notes saved successfully!");
+    });
+
+    // ✔ Load notes manually
+    loadBtn.addEventListener("click", () => {
+      const savedNotes = localStorage.getItem("notes");
+
+      if (savedNotes) {
+        noteArea.value = savedNotes;
+      } else {
+        alert("No saved notes found.");
+      }
+    });
+
+    // ✔ Clear notes
+    clearBtn.addEventListener("click", () => {
+      localStorage.removeItem("notes");
+      noteArea.value = "";
+      alert("Notes cleared.");
+    });
+  </script>
+
+</body>
+</html>

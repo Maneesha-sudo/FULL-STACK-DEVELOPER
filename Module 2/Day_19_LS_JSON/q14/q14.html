@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Todo List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 30px;
+        }
+        #container {
+            width: 350px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        input, button {
+            padding: 8px;
+            margin: 5px 0;
+            width: 100%;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            background: #eee;
+            padding: 10px;
+            margin-top: 8px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        li.completed {
+            text-decoration: line-through;
+            background: #d1ffd1;
+        }
+
+        button.deleteBtn {
+            background: red;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="container">
+    <h2>Enhanced Todo List</h2>
+
+    <input type="text" id="taskInput" placeholder="Enter task...">
+    <button onclick="addTask()">Add Task</button>
+
+    <input type="text" id="searchInput" placeholder="Search tasks..." onkeyup="searchTasks()">
+
+    <ul id="taskList"></ul>
+</div>
+
+<script>
+    // =============================
+    // Load tasks when page opens
+    // =============================
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+    function saveToStorage() {
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+
+    function renderTasks(list = tasks) {
+        const taskList = document.getElementById("taskList");
+        taskList.innerHTML = "";
+
+        list.forEach(task => {
+            const li = document.createElement("li");
+            li.className = task.completed ? "completed" : "";
+
+            li.innerHTML = `
+                <span onclick="toggleComplete(${task.id})">${task.text}</span>
+                <button class="deleteBtn" onclick="deleteTask(${task.id})">X</button>
+            `;
+
+            taskList.appendChild(li);
+        });
+    }
+
+    // =============================
+    // Add Task
+    // =============================
+    function addTask() {
+        const input = document.getElementById("taskInput");
+        const text = input.value.trim();
+
+        if (text === "") {
+            alert("Task cannot be empty!");
+            return;
+        }
+
+        const task = {
+            id: Date.now(),
+            text,
+            completed: false
+        };
+
+        tasks.push(task);
+        saveToStorage();
+        renderTasks();
+
+        input.value = "";
+    }
+
+    // =============================
+    // Toggle Completed
+    // =============================
+    function toggleComplete(id) {
+        tasks = tasks.map(task =>
+            task.id === id
+                ? { ...task, completed: !task.completed }
+                : task
+        );
+
+        saveToStorage();
+        renderTasks();
+    }
+
+    // =============================
+    // Delete Task
+    // =============================
+    function deleteTask(id) {
+        tasks = tasks.filter(task => task.id !== id);
+        saveToStorage();
+        renderTasks();
+    }
+
+    // =============================
+    // Search Tasks
+    // =============================
+    function searchTasks() {
+        const searchText = document.getElementById("searchInput").value.toLowerCase();
+
+        const filtered = tasks.filter(task =>
+            task.text.toLowerCase().includes(searchText)
+        );
+
+        renderTasks(filtered);
+    }
+
+    // Initial render
+    renderTasks();
+</script>
+
+</body>
+</html>
