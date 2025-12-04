@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signup</title>
+</head>
+<body>
+
+<div id="navbar"></div>
+
+<h2>Signup Page</h2>
+<input id="email" placeholder="Email">
+<input id="password" placeholder="Password">
+<button id="signupbtn">Signup</button>
+
+<div id="footer"></div>
+
+<script type="module">
+import { Navbar } from "../Components/navbar.js";
+import { Footer } from "../Components/footer.js";
+
+document.getElementById("navbar").innerHTML = Navbar();
+document.getElementById("footer").innerHTML = Footer();
+
+const email = document.getElementById("email");
+const password = document.getElementById("password");
+const btn = document.getElementById("signupbtn");
+
+btn.onclick = () => {
+    if (!email.value || !password.value) {
+        alert("Please enter both email and password!");
+        return;
+    }
+
+    const user = { email: email.value, password: password.value };
+    localStorage.setItem("user", JSON.stringify(user));
+    alert("Signup Successful!");
+    window.location.href = "./login.html";
+};
+</script>
+
+</body>
+</html>
