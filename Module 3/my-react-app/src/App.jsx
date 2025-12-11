@@ -1,8 +1,7 @@
-function App(){
-  return(
-    <div>
-      <h1>hello world</h1>
-    </div>
-  );
+import Comp from "./Comp";
+
+function App() {
+  return <Comp />;
 }
+
 export default App;
