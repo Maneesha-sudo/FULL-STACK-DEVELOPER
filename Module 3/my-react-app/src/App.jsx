@@ -1,7 +1,7 @@
 import Comp from "./Comp";
 
 function App() {
-  return <Comp />;
+  return <Comp name="manu"/>;
 }
 
 export default App;
